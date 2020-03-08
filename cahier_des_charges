@@ -1,0 +1,30 @@
+*********************       Cahier des charge du projet IGpas2cle    ********************
+
+Rappel des contraintes imposées pour le projet :
+- Obligation d'utiliser une mallette joypi et un ou plusieurs de ses composants ; 
+- Votre projet devra être déployable à l'aide d'un script shell sur une nouvelle mallette rapidement ; 
+- Si des programmes doivent être compilés, ils le seront à partir du PC de développement en utilisant un compilateur croisé ;
+- Vous ne devrez utiliser le langage python QUE SI vous pouvez prouver qu'il n'était pas possible de faire autrement (ce qui doit être un cas très rare !)
+- Il faudra approfondir à l'occasion de ce projet des "sujets" évoqués ou non en cours, au moins un sujet par personne. J'en ai cité quelques-uns lors de mes interventions. Par exemple, systemd, les solutions alternatives pour utiliser les ports GPIO, les lib. ncurses, SDL, l'activation d'un mode kiosk pour faire de la mallette une borne interactive, l'utilisation des bus I2C ou SPI, etc ; 
+- Si vous cherchez des idées de projet, inscrivez-vous au startup weekend organisé prochainement à Lens, du 13 au 15 mars !
+
+Decription du projet :
+Nous souhaitons réaliser une porte connectée qui aura le fonctionnalités suivantes :
+- ouverture de la porte par identification à l'aide d'une carte NFC puis saisie d'un code pin.
+- Accès à une interface Web permettant :
+  - de voir qui est passé par la porte et quand (journal de passage)
+  - de bloquer la porte si nécessaire
+  - d'avoir un flux vidéo en direct permettant de voir qui est devant la porte
+
+Composants utilisés :
+- module NFC MFRC522
+- boutons pour saisies du code pin
+- caméra de la malette JoyPI
+- serveur web pour l'interface d'administration (flux vidéo et controle de la porte)
+éventuellement :
+- écran LCD pour instructions
+
+Sujets appronfondis :
+- Utilisation de plusieurs composants de la malette, par les ports GPIO
+- Mise en place d'un service Web sur l'objet connecté
+- bus SPI
