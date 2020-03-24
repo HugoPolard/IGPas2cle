@@ -1,7 +1,7 @@
 package main
 
 import (
-	"RPI/serveurGo/webServer"
+	"IGPas2cle/goServeurWeb/webServer"
 	"sync"
 )
 
