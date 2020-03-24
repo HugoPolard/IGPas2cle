@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<h1>Administration IGpas2Cle</h1>
+<hr>
+<p>La porte est actuelement <span id="etat"></span></p>
+<hr>
+Logs (5 derniers passage): <br>
+<div id="log">
+
+</div>
+<hr>
+
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script >
+
+    async function asyncCall() {
+    let response = await fetch("http://localhost:80/lock");
+    console.log(response.url)
+    if (response.ok) { // if HTTP-status is 200-299
+                       // get the response body (the method explained below)
+        let json = await response.json();
+
+        console.log(json.porte.locked);
+        if(json.porte.locked){
+            $("#etat").append("fermer");
+            console.log("fermer");
+        }else{
+            $("#etat").append("Ouvert");
+            console.log("ouvert");
+        }
+    } else {
+        $("#etat").append("indisponible");
+    }
+    }
+
+
+
+    asyncCall();
+
+</script>
+<script>
+    let Modelep = $("<p>");
+    function readTextFile(file)
+    {
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function ()
+        {
+            if(rawFile.readyState === 4)
+            {
+                if(rawFile.status === 200 || rawFile.status == 0)
+                {
+                    var allText = rawFile.responseText;
+                    var jsonObj = JSON.parse(allText);
+                    console.log(jsonObj);
+                    /*
+                    var arrayofString = allText.split('\n');
+                    for (var i=5; i > 0; i--){
+                        console.log(arrayofString[arrayofString.length - i ]);
+                        //Modelep.clone().append("arrayofString[arrayofString.length - i ]");
+                        $("#log").append(Modelep.clone().append(arrayofString[arrayofString.length - i ]));
+                    }*/
+
+
+                    for (var i=5; i > 0; i--){
+                        console.log(jsonObj.entre[jsonObj.entre.length - i].timestam + " " +jsonObj.entre[jsonObj.entre.length - i].nom);
+                        //Modelep.clone().append("arrayofString[arrayofString.length - i ]");
+                        $("#log").append(Modelep.clone().append(jsonObj.entre[jsonObj.entre.length - i].timestam + " " +jsonObj.entre[jsonObj.entre.length - i].nom));
+
+                    }
+
+
+
+                }
+            }
+        }
+        rawFile.send(null);
+    }
+
+    readTextFile("log.txt");
+</script>
