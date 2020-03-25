@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -14,6 +15,7 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
+			log.Println(r.Form)
 
 			file ,h ,err:= r.FormFile("file_field")
 
@@ -22,7 +24,7 @@ func main() {
 			fmt.Printf("File Size: %+v\n", h.Size)
 			fmt.Printf("MIME Header: %+v\n", h.Header)
 
-			tempFile, err := ioutil.TempFile("temp-images", "upload-*.png")
+			tempFile, err := ioutil.TempFile("goServeurWeb/temp-images", "upload-*.png")
 			if err != nil {
 				fmt.Println(err)
 			}
