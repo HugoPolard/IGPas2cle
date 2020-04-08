@@ -1,0 +1,20 @@
+======================================
+   bcm2835 1.56: src/test-suite.log
+======================================
+
+# TOTAL: 1
+# PASS:  0
+# SKIP:  0
+# XFAIL: 0
+# FAIL:  1
+# XPASS: 0
+# ERROR: 0
+
+.. contents:: :depth: 2
+
+FAIL: test
+==========
+
+../test-driver: ligne 107: ./test : impossible d'exécuter le fichier binaire : Erreur de format pour exec()
+FAIL test (exit status: 126)
+

@@ -1,0 +1,2 @@
+../test-driver: ligne 107: ./test : impossible d'exécuter le fichier binaire : Erreur de format pour exec()
+FAIL test (exit status: 126)
