@@ -1,0 +1,23 @@
+File is valid, and was successfully uploaded.
+<pre>Here is some more debugging info:array(1) {
+  ["image"]=>
+  array(5) {
+    ["name"]=>
+    string(9) "image.txt"
+    ["type"]=>
+    string(10) "text/plain"
+    ["tmp_name"]=>
+    string(14) "/tmp/php4RNTxs"
+    ["error"]=>
+    int(0)
+    ["size"]=>
+    int(7)
+  }
+}
+
+<hr />
+array(1) {
+  ["filename"]=>
+  string(13) "1231568456128"
+}
+</pre>

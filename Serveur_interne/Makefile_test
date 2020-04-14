@@ -1,0 +1,35 @@
+CC=gcc
+CFLAGS=-Wall
+LDFLAGS=-lpthread -lcurl
+LIBSRC=$(wildcard src/libs/*.c)
+OBJ=$(patsubst src/libs/%.c, out/%.o, $(LIBSRC))
+
+
+all : 
+	@echo $(OBJ)
+	@echo $(LIBSRC)
+
+Serveur:out/files.o out/log.o out/split.o out/main.o out/curlHelper.o
+	$(CC) -o Serveur $(OBJ) $(LDFLAGS) $(CFLAGS)
+
+
+out/%.o : src/libs/%.c
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+out/curlHelper.o : src/libs/curlHelper.c
+	$(CC) -c $< -o out/curlHelper.o $(CFLAGS)
+
+out/split.o: src/libs/split.c
+	$(CC) -c $< -o out/split.o $(CFLAGS)
+
+out/files.o : src/libs/files.c
+	$(CC) -c $< -o out/files.o $(CFLAGS)
+
+out/log.o : src/libs/log.c
+	$(CC) -c $< -DLOG_USE_COLOR -o out/log.o $(CFLAGS)
+
+out/main.o : src/main.c 
+	$(CC) -o out/main.o -c src/main.c $(CFLAGS)
+
+clean :	
+	rm out/*.o Serveur

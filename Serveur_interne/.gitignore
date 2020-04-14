@@ -1,0 +1,11 @@
+.idea
+.vscode
+cmake-build-debug
+CMakeFiles
+out
+CMakeLists.txt
+cmake_install.cmake
+Serveur
+Serveur_interne
+test.txt
+Color
