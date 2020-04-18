@@ -1,5 +1,9 @@
 #include "getUID.h"
 #include <time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 
 #define EXCHANGE_DIR "/tmp/data_exchange/"
 #define EXCHANGE_FILE "to_server.txt"
@@ -30,12 +34,10 @@ char* get_card_uid(char* sn_str) {
 void send_infos_to_server (char* uid_string, char* pic_path) {
 	char path[100] = EXCHANGE_DIR;
 	strcat(path, EXCHANGE_FILE);
-	FILE* f = fopen(path, "a");
+	FILE* f = fopen(path, "w");
 	printf("uid= %s; pic_path=%s; vers %s\n", uid_string, pic_path, path);
-	//fprintf(f, "uid=%s; pic_path=%s;\n", uid_string, pic_path);
+	fprintf(f, "uid=%s; pic_path=%s;\n", uid_string, pic_path);
 	fclose(f);
-	printf("on est 7");
-
 	return;
 }
 
@@ -68,21 +70,13 @@ int main(int argc, char *argv[]) {
 		char uid_string[23];		
 		char filename[1000], command[1000];
 
-		//Creation des fichiers d'echange de données si non existants
+		// Creation le répertoire d'échange de données si nécessaire
+		struct stat st = {0};
 		char path[100] = EXCHANGE_DIR;
 		strcat(path, EXCHANGE_FILE);
-		if (fopen(path,"r") == NULL) {
-			printf("Creation des fichiers d'echange\n");
-			// création du répertoire d'échange s'il n'existe pas
-			char cmd[100] = "mkdir ";
-			strcat(cmd, EXCHANGE_DIR);
-			system(cmd);
-			// création du fichier d'échange s'il n'existe pas
-			strcpy(cmd, "touch ");
-			strcat(cmd, path);
-			system(cmd);
+		if (stat(EXCHANGE_DIR, &st) == -1) {
+		    mkdir(EXCHANGE_DIR, 0722);
 		}
-		else { printf("le fichier existe\n");}
 		
 		// Attente de la carte et lecture de l'uid
 		get_card_uid(uid_string);

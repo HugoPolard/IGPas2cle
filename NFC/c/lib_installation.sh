@@ -1,5 +1,8 @@
 #!/bin/bash
 
+EXCHANGE_DIR=/var/data_exchange/
+EXCHANGE_FILE=/var/data_exchange/to_server.txt
+
 #chemin du compilateur croisé
 CC=/root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
 
@@ -12,3 +15,8 @@ make install
 
 echo "Compilation de la librarie rc522 et du programme getUID (futur nfcd)"
 make
+
+echo "Creation des fichiers de communication avec le serveur local"
+mkdir $EXCHANGE_DIR
+touch $EXCHANGE_FILE
+
