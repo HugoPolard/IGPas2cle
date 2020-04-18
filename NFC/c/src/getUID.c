@@ -30,11 +30,12 @@ char* get_card_uid(char* sn_str) {
 void send_infos_to_server (char* uid_string, char* pic_path) {
 	char path[100] = EXCHANGE_DIR;
 	strcat(path, EXCHANGE_FILE);
-	FILE* f = fopen(path, "w");
-	printf("uid= %s; pic_path=%s; vers %s-\n", uid_string, pic_path, path);
-	fprintf(f, "uid= %s; pic_path=%s;\n", uid_string, pic_path);
-	printf("on est 6");
+	FILE* f = fopen(path, "a");
+	printf("uid= %s; pic_path=%s; vers %s\n", uid_string, pic_path, path);
+	//fprintf(f, "uid=%s; pic_path=%s;\n", uid_string, pic_path);
 	fclose(f);
+	printf("on est 7");
+
 	return;
 }
 
@@ -61,20 +62,27 @@ int main(int argc, char *argv[]) {
 
     /* read & set GID and UID from config file */
     if (read_conf_uid()!= 0) close_out(1);
-
-	// création du répertoire d'échange s'il n'existe pas
-	char cmd[100] = "mkdir ";
-	strcat(cmd, EXCHANGE_DIR);
-	system(cmd);
-	// création du fichier d'échange s'il n'existe pas
-	strcpy(cmd, "touch ");
-	strcat(cmd, EXCHANGE_FILE);
-	system(cmd);
 	
     while (loop > 0)
     {
 		char uid_string[23];		
 		char filename[1000], command[1000];
+
+		//Creation des fichiers d'echange de données si non existants
+		char path[100] = EXCHANGE_DIR;
+		strcat(path, EXCHANGE_FILE);
+		if (fopen(path,"r") == NULL) {
+			printf("Creation des fichiers d'echange\n");
+			// création du répertoire d'échange s'il n'existe pas
+			char cmd[100] = "mkdir ";
+			strcat(cmd, EXCHANGE_DIR);
+			system(cmd);
+			// création du fichier d'échange s'il n'existe pas
+			strcpy(cmd, "touch ");
+			strcat(cmd, path);
+			system(cmd);
+		}
+		else { printf("le fichier existe\n");}
 		
 		// Attente de la carte et lecture de l'uid
 		get_card_uid(uid_string);
@@ -82,7 +90,7 @@ int main(int argc, char *argv[]) {
 		time_t t = time(NULL);
 		struct tm tm = *localtime(&t);
 		sprintf(filename, "%s%d-%02d-%02d_%02d:%02d:%02d.jpg", EXCHANGE_DIR, tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
-		sprintf(command, "sudo fswebcam %s", filename);
+		sprintf(command, "fswebcam %s", filename);
 		printf("cmd : %s\n", command);
 		system(command);
 		send_infos_to_server(uid_string, filename);
