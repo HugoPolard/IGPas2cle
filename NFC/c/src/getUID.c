@@ -1,5 +1,4 @@
-#include "main.h"
-
+#include "getUID.h"
 #include <time.h>
 
 #define EXCHANGE_DIR "/tmp/data_exchange/"

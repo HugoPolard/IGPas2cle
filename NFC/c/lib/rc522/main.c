@@ -69,11 +69,12 @@ char VERSION[] = "1.65.3";
 
 #include "main.h"
 
+int use_vblock;
+
 // command line options
-uint8_t debug=0;			// trigger for debug messages
-int		NoColor = 0;		// disables color output (if set)
-int 	UpdateTrailer = 0;	// if set, will allow to update access permission trailer
-int 	use_vblock= 0xff;	// block if provided (e.g. on command line)
+uint8_t debug=0;            // trigger for debug messages
+int     NoColor = 0;        // disables color output (if set)
+int     UpdateTrailer = 0;  // if set, will allow to update access permission trailer
 
 // initialize values
 uint8_t use_gpio=0;         // was valid GPIO for reset ?
@@ -87,9 +88,9 @@ char    save_mem=0;         // trigger (or disable if issues in config file) to 
 uint8_t SN[10];             // UID / serial number of card
 uint16_t CType=0;           // card type/ ATAQ response
 uint8_t SN_len=0;           // length of UID / serial  number ( 4 / 7 / 10)
-	
-uint8_t SAK[3];				// SAK (select acknowledgement)
-int     max_blocks=64;    	// # of block on a card (default is classic = 64)
+    
+uint8_t SAK[3];             // SAK (select acknowledgement)
+int     max_blocks=64;      // # of block on a card (default is classic = 64)
 uint8_t page_step=0;        // increment to read the card
 
 /* Display in color
@@ -2418,6 +2419,7 @@ int write_message(uint8_t *mess, int start_sector, int start_block, int len)
 	return(TAG_OK);
 }
 
+/*
 int main(int argc, char *argv[]) {
 
     int     tmp;
@@ -2611,19 +2613,19 @@ int main(int argc, char *argv[]) {
     // catch signals
 	set_signals();
 	    
-    /* read /etc/rc522.conf */
+    // read /etc/rc522.conf 
     if (get_config_file()) exit(1);
 
-    /* set BCM2835 Pins correct */
+    // set BCM2835 Pins correct 
     if (HW_init(spi_speed,gpio)) close_out(1);
     
-    /* initialise the RC522 */
+    // initialise the RC522 
 	InitRc522();
 
-    /* read & set GID and UID from config file */
+    // read & set GID and UID from config file
     if (read_conf_uid()!= 0) close_out(1);
 
-	/* if requested to write message from command line, than only perform that action */
+	// if requested to write message from command line, than only perform that action 
 	if (got_mess == 1) 
 	{
 		tmp = write_message((uint8_t *) message, start_sector, start_block, length);
@@ -2635,7 +2637,7 @@ int main(int argc, char *argv[]) {
 		else close_out(1);
 	}
 
-	/* if requested to read/get message from command line, than only perform that action */
+	// if requested to read/get message from command line, than only perform that action 
 	if (get_bytes != 0) 
 	{
 		if (get_message(start_sector, start_block, get_bytes, disp_as_alpha) == TAG_OK)	
@@ -2649,37 +2651,37 @@ int main(int argc, char *argv[]) {
         if (NotEndless)
             p_printf(WHITE, "\nWill still handle %d card(s)\n", loop);
 
-        /* read a specific card block */
+        // read a specific card block 
         if (d_read){ if (read_from_card() != TAG_OK) close_out(1); }
         
-        /* write a specific card block */
+        // write a specific card block 
         else if (d_write){ if(write_to_card() != TAG_OK) close_out(1); }
         
-        /* perform action based on info in a specific card block */
+        // perform action based on info in a specific card block 
         else if (add_act){ if (block_action()!= TAG_OK) close_out(1); }
         
-        /* change access right on a specific card block */
+        // change access right on a specific card block 
         else if (change){ if (change_block_access()!= TAG_OK) close_out(1); }
         
-        /* update a key on specific sector */
+        // update a key on specific sector 
         else if (upd_key){ if (key_upd()!= TAG_OK) close_out(1);}
         
-        /* read a specific card block */
+        // read a specific card block 
         else if (create_block) {if (create_value_block(set_val)!= V_OK) close_out(1);} 
 	
-        /* increment specific card block */
+        // increment specific card block 
         else if (incr_block){ if(increment_value_block()!= V_OK) close_out(1); }
         
-        /* decrement specific card block */
+        // decrement specific card block 
         else if (decr_block){ if (decrement_value_block()!= V_OK) close_out(1); }
         
-        /* remove specific card block */
+        // remove specific card block 
         else if (rem_block){ if (remove_value_block() != V_OK) close_out(1); }
  
-         /* show specific card block */
+        // show specific card block 
         else if (show_block){ if (show_value_block(&block, &value,1) != V_OK) close_out(1); }
         
-        /* perform action based on UID */
+        // perform action based on UID 
         else if (action) { if (uid_action()!= TAG_OK) close_out(1); }
 
 		// save memory of card ??
@@ -2710,3 +2712,4 @@ int main(int argc, char *argv[]) {
     // stop -Wall complaining
     exit(0);
 }
+*/

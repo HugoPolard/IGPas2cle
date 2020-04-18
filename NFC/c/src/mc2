@@ -1,1 +1,0 @@
-gcc -Wall -Wextra value.c config.c rfid.c rc522.c main.c getUID.c -o getUID -lbcm2835

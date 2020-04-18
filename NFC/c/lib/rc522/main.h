@@ -56,6 +56,8 @@
 #include "rfid.h"
 #include "value.h"
 #include "rc522.h"
+#include "rc522.h"
+
 
 // color display enable
 #define RED 	1
@@ -188,7 +190,29 @@ extern int use_vblock;			// value block to use (-B option)
 extern int max_blocks;			// max_blocks on card
 extern uint8_t SN[10];          // serial number of card
 extern uint8_t SN_len;          // length of serial number (4/7/10)
-extern int use_vblock;			// value block to use (-B option)
+
+// command line options
+extern uint8_t debug;            // trigger for debug messages
+extern int     NoColor;        // disables color output (if set)
+extern int     UpdateTrailer;  // if set, will allow to update access permission trailer
+
+// initialize values
+extern uint8_t use_gpio;         // was valid GPIO for reset ?
+extern uint8_t gpio;           // GPIO for hard-reset
+extern uint8_t loop, NotEndless; // main loop
+extern uint32_t spi_speed; // speed for SP (4 < >125) overruled by config file value
+extern char    fmem_path[255];     // to hold the directory for memory save (from config file)
+extern char    save_mem;         // trigger (or disable if issues in config file) to save card info
+
+// card information (globally used)
+extern uint8_t SN[10];             // UID / serial number of card
+extern uint16_t CType;           // card type/ ATAQ response
+extern uint8_t SN_len;           // length of UID / serial  number ( 4 / 7 / 10)
+    
+extern uint8_t SAK[3];             // SAK (select acknowledgement)
+extern int     max_blocks;      // # of block on a card (default is classic = 64)
+extern uint8_t page_step;        // increment to read the card
+
 
 /**
  * For details see MF1ICS50_rev5_3.pdf
