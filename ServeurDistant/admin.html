@@ -14,7 +14,9 @@ Logs (5 derniers passage): <br>
 
 </div>
 <hr>
-
+Photos (5 derniers passage): <br>
+<div id="photo">
+</div>
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -48,6 +50,8 @@ Logs (5 derniers passage): <br>
 </script>
 <script>
     let Modelep = $("<p>");
+    let Modeleimg = $("<img>");
+    let ModeleDiv = $("<div>");
     function readTextFile(file)
     {
         var rawFile = new XMLHttpRequest();
@@ -59,16 +63,22 @@ Logs (5 derniers passage): <br>
                 if(rawFile.status === 200 || rawFile.status == 0)
                 {
                     var allText = rawFile.responseText;
-                    var jsonObj = JSON.parse(allText);
-                    console.log(jsonObj);
-                    /*
+                    //var jsonObj = JSON.parse(allText);
+                    //console.log(jsonObj);
+
                     var arrayofString = allText.split('\n');
                     for (var i=5; i > 0; i--){
                         console.log(arrayofString[arrayofString.length - i ]);
                         //Modelep.clone().append("arrayofString[arrayofString.length - i ]");
-                        $("#log").append(Modelep.clone().append(arrayofString[arrayofString.length - i ]));
-                    }*/
+                        var ligne=arrayofString[arrayofString.length - i ].split(" ; ");
+                        var text = ligne[0] + " " + ligne[1];
+                        var image = ligne[2].split("=");
 
+                        $("#log").append(Modelep.clone().append(text));
+
+                        $("#photo").append(ModeleDiv.clone().append(Modeleimg.clone().attr('src',image[1])).append(Modelep.clone().append(text)));
+                    }
+/*
 
                     for (var i=5; i > 0; i--){
                         console.log(jsonObj.entre[jsonObj.entre.length - i].timestam + " " +jsonObj.entre[jsonObj.entre.length - i].nom);
@@ -76,7 +86,7 @@ Logs (5 derniers passage): <br>
                         $("#log").append(Modelep.clone().append(jsonObj.entre[jsonObj.entre.length - i].timestam + " " +jsonObj.entre[jsonObj.entre.length - i].nom));
 
                     }
-
+*/
 
 
                 }
@@ -87,3 +97,8 @@ Logs (5 derniers passage): <br>
 
     readTextFile("log.txt");
 </script>
+<style>
+    img{
+        display: block;
+    }
+</style>
