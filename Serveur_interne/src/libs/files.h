@@ -10,6 +10,14 @@
 #include <string.h>
 
 int get_lines_in_file(char *filename);
+
 char *readLastLine(char *filename);
+
+
+// fichier .env
+char *exchange_file;
+char *server_addr;
+
+void parse_env();
 
 #endif //SERVEUR_INTERNE_FILES_H

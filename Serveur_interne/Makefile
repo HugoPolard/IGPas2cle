@@ -1,7 +1,16 @@
-CC=gcc
-TARGET=Serveur
+DEBUG=yes
+CFLAGS=-Wall -g
+ifeq ($(DEBUG),yes)
+	CC=gcc
+	TARGET=Serveur_interne
+else
+	CC=/home/gregoire/Documents/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
+	TARGET=Serveur_RPI
+	CURL_LIB=-L/home/gregoire/Documents/RPI/Projet/IGPas2cle/build/lib
+	CURL_INC=-I/home/gregoire/Documents/RPI/Projet/IGPas2cle/build/include
+	CFLAGS=-Wall -std=c99
+endif
 
-CFLAGS=-Wall
 LDFLAGS=-lpthread -lcurl
 
 LIBSRC=$(wildcard src/libs/*.c)
@@ -13,17 +22,19 @@ OBJ=$(wildcard out/*.o)
 all : $(TARGET)
 
 $(TARGET): $(LIBOBJ) out/main.o
-	$(CC) -o $(TARGET) $(OBJ) $(LDFLAGS) $(CFLAGS)
+	$(CC) -o $(TARGET) $(OBJ) $(CURL_LIB) $(CURL_INC) $(LDFLAGS) $(CFLAGS)
 
 out/%.o : src/libs/%.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 
+out/curlHelper.o : src/libs/curlHelper.c 
+	$(CC) -c $< -o out/curlHelper.o -L$(CURL_LIB) -I$(CURL_INC)
 
 out/log.o : src/libs/log.c
 	$(CC) -c $< -DLOG_USE_COLOR -o out/log.o $(CFLAGS)
 
 out/main.o : src/main.c 
-	$(CC) -o out/main.o -c src/main.c $(CFLAGS)
+	$(CC) -o out/main.o -c src/main.c $(CFLAGS) -L$(CURL_LIB) -I$(CURL_INC)
 
 clean :	
-	rm out/*.o Serveur
+	rm out/*.o Serveur_interne

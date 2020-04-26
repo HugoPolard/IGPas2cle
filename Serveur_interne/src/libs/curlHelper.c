@@ -2,13 +2,12 @@
 // Created by gregoire on 09/04/2020.
 //
 
-#include "curlHelper.h"
 #include <sys/stat.h>
 #include <curl/curl.h>
+#include "curlHelper.h"
 #include "log.h"
 
-int sendFile(const char *url,const char * uid, const char *path)
-{
+int sendFile(const char *url, const char *uid, const char *path) {
     FILE *fd;
     CURL *curl;
     CURLcode res;
@@ -19,18 +18,15 @@ int sendFile(const char *url,const char * uid, const char *path)
     static const char buf[] = "Expect:";
 
     fd = fopen(path, "rb");
-    if (fd == NULL)
-    {
+    if (fd == NULL) {
         log_error("Fichier non trouvé");
         return 1;
     }
-    if (fstat(fileno(fd), &file_info) != 0)
-    {
+    if (fstat(fileno(fd), &file_info) != 0) {
         log_error("Fichier non valide");
     }
     curl = curl_easy_init();
-    if (curl)
-    {
+    if (curl) {
         form = curl_mime_init(curl);
 
         field = curl_mime_addpart(form);
@@ -40,10 +36,10 @@ int sendFile(const char *url,const char * uid, const char *path)
         curl_mime_name(field, "filename");
         curl_mime_data(field, uid, CURL_ZERO_TERMINATED);
 
-        curl_easy_setopt(curl, CURLOPT_URL, "http://localhost/projet/index.php");
+        curl_easy_setopt(curl, CURLOPT_URL, url);
         curl_easy_setopt(curl, CURLOPT_NOBODY, 1);
-        
-        FILE *f = fopen("curl.log", "wb");
+
+        FILE *f = fopen("curl.log", "a+");
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, f);
 
 
@@ -51,12 +47,10 @@ int sendFile(const char *url,const char * uid, const char *path)
         curl_easy_setopt(curl, CURLOPT_MIMEPOST, form);
         res = curl_easy_perform(curl);
         /* Check for errors */
-        if (res != CURLE_OK)
-        {
+        if (res != CURLE_OK) {
             log_error("curl a échoué : %s", curl_easy_strerror(res));
-        }
-        else
-        {
+            log_debug("URL du serveur : %s", url);
+        } else {
             log_info("Image transférée");
         }
         /* always cleanup */

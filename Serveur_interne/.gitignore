@@ -5,7 +5,7 @@ CMakeFiles
 out
 CMakeLists.txt
 cmake_install.cmake
-Serveur
+Serveur_*
 Serveur_interne
 test.txt
 Color
