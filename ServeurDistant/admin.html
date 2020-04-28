@@ -65,18 +65,36 @@ Photos (5 derniers passage): <br>
                     var allText = rawFile.responseText;
                     //var jsonObj = JSON.parse(allText);
                     //console.log(jsonObj);
-
+    var text, image;
                     var arrayofString = allText.split('\n');
-                    for (var i=5; i > 0; i--){
+                    var nb;
+                    if(arrayofString.length < 5){
+                        nb = arrayofString.length
+                    }else{
+                        nb = 5;
+                    }
+                    for (var i=nb; i > 0; i--){
                         console.log(arrayofString[arrayofString.length - i ]);
                         //Modelep.clone().append("arrayofString[arrayofString.length - i ]");
-                        var ligne=arrayofString[arrayofString.length - i ].split(" ; ");
-                        var text = ligne[0] + " " + ligne[1];
-                        var image = ligne[2].split("=");
+                        var ligne=arrayofString[arrayofString.length - i ].split(";");
 
-                        $("#log").append(Modelep.clone().append(text));
+                        if(ligne.length == 5){
+                            text = ligne[0] + " " + ligne[2] + " " + ligne[3] + " : Authorisé";
+                            image = ligne[4].split("=");
 
-                        $("#photo").append(ModeleDiv.clone().append(Modeleimg.clone().attr('src',image[1])).append(Modelep.clone().append(text)));
+                            $("#log").append(Modelep.clone().append(text));
+
+                            $("#photo").append(ModeleDiv.clone().append(Modeleimg.clone().attr('src',image[1])).append(Modelep.clone().append(text)));
+                        }else{
+                            text = ligne[0] + " " + ligne[2] + " : Refusé";
+                            image = ligne[3].split("=");
+                            console.log(image[1]);
+
+                            $("#log").append(Modelep.clone().append(text));
+
+                            $("#photo").append(ModeleDiv.clone().append(Modeleimg.clone().attr('src',image[1])).append(Modelep.clone().append(text)));
+                        }
+
                     }
 /*
 
