@@ -1,5 +1,5 @@
 DEBUG=yes
-CFLAGS=-Wall -g
+CFLAGS=-Wall
 ifeq ($(DEBUG),yes)
 	CC=gcc
 	TARGET=Serveur_interne
@@ -8,7 +8,7 @@ else
 	TARGET=Serveur_RPI
 	CURL_LIB=-L/home/gregoire/Documents/RPI/Projet/IGPas2cle/build/lib
 	CURL_INC=-I/home/gregoire/Documents/RPI/Projet/IGPas2cle/build/include
-	CFLAGS=-Wall -std=c99
+	CFLAGS=-Wall -std=gnu99
 endif
 
 LDFLAGS=-lpthread -lcurl
@@ -28,13 +28,13 @@ out/%.o : src/libs/%.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 out/curlHelper.o : src/libs/curlHelper.c 
-	$(CC) -c $< -o out/curlHelper.o -L$(CURL_LIB) -I$(CURL_INC)
+	$(CC) -c $< -o out/curlHelper.o $(CURL_LIB) $(CURL_INC)
 
 out/log.o : src/libs/log.c
 	$(CC) -c $< -DLOG_USE_COLOR -o out/log.o $(CFLAGS)
 
 out/main.o : src/main.c 
-	$(CC) -o out/main.o -c src/main.c $(CFLAGS) -L$(CURL_LIB) -I$(CURL_INC)
+	$(CC) -o out/main.o -c src/main.c $(CFLAGS) $(CURL_LIB) $(CURL_INC)
 
 clean :	
 	rm out/*.o Serveur_interne
