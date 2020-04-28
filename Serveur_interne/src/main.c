@@ -16,28 +16,29 @@ void *fileChangeHandler(void *args) {
 
     //    char *filename = "/tmp/data_exchange/to_server.txt";
     char *filename = exchange_file;
-    int old_lines = get_lines_in_file(filename);
-
+//    int old_lines = get_lines_in_file(filename);
+    char old_path[50] = "";
     do {
-        int newLines = get_lines_in_file(filename);
+        /*int newLines = get_lines_in_file(filename);
         if (newLines == -1) {
             log_fatal("Fichier non trouvé");
             system("pwd");
             break;
-        }
+        }*/
 
-        if (newLines > old_lines) {
-            char *lastLine = readLastLine(filename);
-            char *strUID = split(lastLine, " ; ", 1);
-            char *strPath = split(lastLine, " ; ", 2);
 
-            char *uid = split(strUID, "=", 2);
-            char *path = split(strPath, "=", 2);
 
-            log_debug("struid = %s", strUID);
+        char *lastLine = readLastLine(filename);
+        char *strUID = split(lastLine, " ; ", 1);
+        char *strPath = split(lastLine, " ; ", 2);
+
+        char *uid = split(strUID, "=", 2);
+        char *path = split(strPath, "=", 2);
+
+        if (strcmp(old_path, path)) {
             log_debug("uid = %s", uid);
             log_debug("path = %s", path);
-
+            strcpy(old_path, path);
             sendFile(server_addr, uid, path);
             free(strPath);
             free(strUID);
@@ -46,7 +47,6 @@ void *fileChangeHandler(void *args) {
             free(lastLine);
         }
 
-        old_lines = newLines;
 
         usleep(1000000);
     } while (1);
@@ -74,11 +74,13 @@ void route() {
             if (strcmp(param, "open") == 0) {
                 if (strcmp(value, "true") == 0) {
                     log_info("On ouvre la porte");
-//                    system("systemctl kill -s 10 doorD.service");
+                    system("systemctl kill -s 10 doorD.service");
                 } else {
                     log_info("On n'ouvre pas la porte");
                 }
             }
+            free(param);
+            free(value);
         }
     ROUTE_GET("/lock")
         {
@@ -95,16 +97,10 @@ void route() {
                     log_info("On ne verouille pas la porte");
                 }
             }
+            free(param);
+            free(value);
 
         }
-
-    ROUTE_POST("/")
-        {
-            printf("HTTP/1.1 200 OK\r\n\r\n");
-            printf("Wow, seems that you POSTed %d bytes. \r\n", payload_size);
-            printf("Fetch the data using `payload` variable.");
-        }
-
         ROUTE_END()
 }
 
