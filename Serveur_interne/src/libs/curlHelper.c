@@ -33,14 +33,14 @@ int sendFile(const char *url, const char *uid, const char *path) {
         curl_mime_name(field, "image");
         curl_mime_filedata(field, path);
         field = curl_mime_addpart(form);
-        curl_mime_name(field, "filename");
+        curl_mime_name(field, "uid");
         curl_mime_data(field, uid, CURL_ZERO_TERMINATED);
 
         curl_easy_setopt(curl, CURLOPT_URL, url);
         curl_easy_setopt(curl, CURLOPT_NOBODY, 1);
 
-        FILE *f = fopen("curl.log", "a+");
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, f);
+//        FILE *f = fopen("curl.log", "a+");
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, stderr);
 
 
         headerlist = curl_slist_append(headerlist, buf);
@@ -59,6 +59,8 @@ int sendFile(const char *url, const char *uid, const char *path) {
         curl_mime_free(form);
         /* free slist */
         curl_slist_free_all(headerlist);
+    } else{
+        log_error("Impossible de lancer curl");
     }
     fclose(fd);
     return 0;
