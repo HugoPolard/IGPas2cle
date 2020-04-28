@@ -49,6 +49,7 @@ Photos (5 derniers passage): <br>
 
 </script>
 <script>
+	let LogFilePath = "logs/entries.log";
     let Modelep = $("<p>");
     let Modeleimg = $("<img>");
     let ModeleDiv = $("<div>");
@@ -113,7 +114,7 @@ Photos (5 derniers passage): <br>
         rawFile.send(null);
     }
 
-    readTextFile("log.txt");
+    readTextFile(LogFilePath);
 </script>
 <style>
     img{
