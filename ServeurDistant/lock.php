@@ -1,0 +1,1 @@
+<?php if (isset($_POST["locked"]){ $locked = $_POST["locked"]; switch ($locked){ case "true" : $_GLOBALS["locked"] = true; case "false": $_GLOBALS["locked"] = false; default : echo "j'en veux pas"; } } else { $arr["locked"] = $_GLOBALS["locked"]; echo json_encode($arr); } 
