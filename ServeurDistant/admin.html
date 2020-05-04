@@ -8,106 +8,135 @@
 <h1>Administration IGpas2Cle</h1>
 <hr>
 <p>La porte est actuelement <span id="etat"></span></p>
+
+<input id="verou" type="button" value="Verouillage" onclick="onclickverou()">
 <hr>
-Logs (5 derniers passage): <br>
+<p>Logs (5 derniers passage): </p>
 <div id="log">
 
 </div>
 <hr>
-Photos (5 derniers passage): <br>
+<p>Photos (5 derniers passage):</p>
 <div id="photo">
 </div>
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script >
+<script>
     var rpiServerAddress = "localhost";
     var rpiPort = "80";
     var pictureDir = "./pictures/";
 
     async function asyncCall() {
-    let response = await fetch("http://"+rpiServerAddress+":"+rpiPort+"/lock");
-    console.log(response.url)
-    if (response.ok) { // if HTTP-status is 200-299
-                       // get the response body (the method explained below)
-        let json = await response.json();
+        $("#etat").text("actuellement questionnée sur son état");
+        let response = await fetch("http://" + rpiServerAddress + ":" + rpiPort + "/lock");
+        console.log(response.url)
+        if (response.ok) { 
+            let json = await response.json();
 
-        console.log(json.porte.locked);
-        if(json.porte.locked){
-            $("#etat").append("fermer");
-            console.log("fermer");
-        }else{
-            $("#etat").append("Ouvert");
-            console.log("ouvert");
+            console.log(json.porte.locked);
+            if (json.porte.locked) {
+                $("#etat").text("fermer");
+                console.log("fermer");
+            } else {
+                $("#etat").text("Ouvert");
+                console.log("ouvert");
+            }
+        } else {
+            $("#etat").text("indisponible");
         }
-    } else {
-        $("#etat").append("indisponible");
     }
-    }
-
 
 
     asyncCall();
 
 </script>
 <script>
+
+
+    function onclickverou() {
+        if ($("#verou").val() == "Verouillage") {
+            $.post(
+                "lock.php", {
+                    locked: "true",
+                    code: 1
+                }, () => {
+                    $("#verou").val("Deverouillage");
+                    asyncCall();
+                }
+            );
+
+        } else {
+            $.post(
+                "lock.php", {
+                    locked: "false",
+                    code: 1
+                },
+                () => {
+                    $("#verou").val("Verouillage");
+                    asyncCall();
+
+                }
+            );
+
+        }
+
+    }
+
     let LogFilePath = "logs/entries.log";
     let Modelep = $("<p>");
     let Modeleimg = $("<img>");
     let ModeleDiv = $("<div>");
-    function readTextFile(file)
-    {
+
+    function readTextFile(file) {
         var rawFile = new XMLHttpRequest();
         rawFile.open("GET", file, false);
-        rawFile.onreadystatechange = function ()
-        {
-            if(rawFile.readyState === 4)
-            {
-                if(rawFile.status === 200 || rawFile.status == 0)
-                {
+        rawFile.onreadystatechange = function () {
+            if (rawFile.readyState === 4) {
+                if (rawFile.status === 200 || rawFile.status == 0) {
                     var allText = rawFile.responseText;
                     //var jsonObj = JSON.parse(allText);
                     //console.log(jsonObj);
-    var text, image;
-                    var arrayofString = allText.split('\n').slice(0,-1);
+                    var text, image;
+                    var arrayofString = allText.split('\n').slice(0, -1);
                     var nb;
-                    if(arrayofString.length < 5){
+                    if (arrayofString.length < 5) {
                         nb = arrayofString.length
-                    }else{
+                    } else {
                         nb = 5;
                     }
-                    for (var i=nb; i > 0; i--){
-                        console.log(arrayofString[arrayofString.length - i ]);
+                    for (var i = nb; i > 0; i--) {
+                        console.log(arrayofString[arrayofString.length - i]);
                         //Modelep.clone().append("arrayofString[arrayofString.length - i ]");
-                        var ligne=arrayofString[arrayofString.length - i ].split(";");
+                        var ligne = arrayofString[arrayofString.length - i].split(";");
                         console.log(ligne);
 
-                        if(ligne.length == 5){
+                        if (ligne.length == 5) {
                             text = ligne[0] + " " + ligne[2] + " " + ligne[3] + " : Autorisé";
                             image = ligne[4].split("=");
 
                             $("#log").append(Modelep.clone().append(text));
 
-                            $("#photo").append(ModeleDiv.clone().append(Modeleimg.clone().attr('src',image[1])).append(Modelep.clone().append(text)));
-                        }else{
+                            $("#photo").append(ModeleDiv.clone().append(Modeleimg.clone().attr('src', image[1])).append(Modelep.clone().append(text)));
+                        } else {
                             text = ligne[0] + " " + ligne[2] + " : Refusé";
                             image = ligne[3].split("=");
-                            imagePath = pictureDir+image[1].split("/")[6];
+                            imagePath = pictureDir + image[1].split("/")[6];
 
                             $("#log").append(Modelep.clone().append(text));
 
-                            $("#photo").append(ModeleDiv.clone().append(Modeleimg.clone().attr('src',imagePath)).append(Modelep.clone().append(text)));
+                            $("#photo").append(ModeleDiv.clone().append(Modeleimg.clone().attr('src', imagePath)).append(Modelep.clone().append(text)));
                         }
 
                     }
-/*
-                    for (var i=5; i > 0; i--){
-                        console.log(jsonObj.entre[jsonObj.entre.length - i].timestam + " " +jsonObj.entre[jsonObj.entre.length - i].nom);
-                        //Modelep.clone().append("arrayofString[arrayofString.length - i ]");
-                        $("#log").append(Modelep.clone().append(jsonObj.entre[jsonObj.entre.length - i].timestam + " " +jsonObj.entre[jsonObj.entre.length - i].nom));
-                    }
-*/
+                    /*
+                                        for (var i=5; i > 0; i--){
+                                            console.log(jsonObj.entre[jsonObj.entre.length - i].timestam + " " +jsonObj.entre[jsonObj.entre.length - i].nom);
+                                            //Modelep.clone().append("arrayofString[arrayofString.length - i ]");
+                                            $("#log").append(Modelep.clone().append(jsonObj.entre[jsonObj.entre.length - i].timestam + " " +jsonObj.entre[jsonObj.entre.length - i].nom));
+                                        }
+                    */
 
 
                 }
@@ -119,7 +148,7 @@ Photos (5 derniers passage): <br>
     readTextFile(LogFilePath);
 </script>
 <style>
-    img{
+    img {
         display: block;
     }
 </style>
