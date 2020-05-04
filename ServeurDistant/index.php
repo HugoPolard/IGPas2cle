@@ -43,13 +43,10 @@ function get_door_locked($dbConnection, $code) {
     return null;
 }
 
-if (!isset($_GLOBAL["locked"]))
-    $_GLOBAL["locked"]=true;
-
+$door_code = 1;
 // Ouveture des fichiers et indication de la requête dans les logs
 $logfile = fopen($logfilepath, "a");
 $entriesfile = fopen($entriesfilepath, "a");
-var_dump($entriesfile);
 fprintf($logfile, "[%s] requete reçue\n", date("Y,M,d-h:i:s-A"));
 
 // Connexion à la base de données
@@ -88,14 +85,14 @@ if(isset($_POST["uid"]) && isset($_FILES["image"])) {
 
 // Get the user code from the received uid (or nothing if uid not in db)
     $user_code = get_user_code_by_UID($dbConnection, $_POST["uid"]);
-    $door_locked = get_door_locked($dbConnection, $user_code);
-    if ($user_code != -1 && $door_locked == 0) {
+    $door_locked = get_door_locked($dbConnection, $door_code);
+    if ($user_code !== -1 && $door_locked === 0) {
         // Get user first and last name form database via user code
         if ($user_infos = get_user_infos($dbConnection, $user_code)) {
             //Request door opening via rpi server
             $response = file_get_contents("http://".$rpiServerAddress.":".$rpiPort."/".$rpiFile."?open=true");
 	        if ($response === "") { // Réponse http valide pour l'ouverture de la porte
-               fprintf($entriesfile, "[%s];acces=true;nom=%s;prenom=%s; picture=%s\n", date("Y,M,d-h:i:s-A"), user_infos["nom"], user_infos["prenom"], $uploadfile);
+               fprintf($entriesfile, "[%s];acces=true;nom=%s;prenom=%s; picture=%s\n", date("Y,M,d-h:i:s-A"), $user_infos["nom"], $user_infos["prenom"], $uploadfile);
             }
             else {
                 fprintf($logfile, "[%s] ACCES ERROR : request to door failed\n", date("Y,M,d-h:i:s-A"));
