@@ -9,7 +9,7 @@
 <hr>
 <p>La porte est actuelement <span id="etat"></span></p>
 
-<input id="verou" type="button" value="Verrouillage" onclick="onclickverou()">
+<input id="verou" type="button" value="Verrouillage" hidden onclick="onclickverou()">
 <hr>
 <p>Logs (5 derniers passage): </p>
 <div id="log">
@@ -24,29 +24,31 @@
 <script src="./jquery.min.js"></script>
 <script>
     var ServerAddress = "localhost";
-	var ServerDir = "/IGPas2cle/ServeurDistant"
+    var ServerDir = "/IGPas2cle/ServeurDistant"
     var pictureDir = "./pictures/";
 
     async function asyncCall() {
         $("#etat").text(" questionnée sur son état");
         let response = await fetch("http://" + ServerAddress + ServerDir + "/lock.php?code=1");
         console.log(response)
-        if (response.ok) { 
+        if (response.ok) {
             let json = await response.json();
 
             console.log(json.locked);
             if (json.locked) {
                 $("#etat").text("fermée");
+                $("#verou").val("Deverrouillage").show();
                 console.log("fermée");
             } else {
                 $("#etat").text("ouverte");
+                $("#verrou").show();
                 console.log("ouverte");
             }
         } else {
             $("#etat").text("indisponible");
         }
-    }
 
+    }
     asyncCall();
 
 
@@ -85,12 +87,13 @@
     let ModeleDiv = $("<div>");
 
     function readTextFile(file) {
+
         var rawFile = new XMLHttpRequest();
         rawFile.open("GET", file, false);
         rawFile.onreadystatechange = function () {
             if (rawFile.readyState === 4) {
-            	$("#log").empty();
-				$("#photo").empty();
+                $("#log").empty();
+                $("#photo").empty();
                 if (rawFile.status === 200 || rawFile.status == 0) {
                     var allText = rawFile.responseText;
                     //var jsonObj = JSON.parse(allText);
@@ -143,7 +146,7 @@
         rawFile.send(null);
     }
 
-	readTextFile(LogFilePath);
+    readTextFile(LogFilePath);
     window.setInterval(readTextFile, 10000, LogFilePath);
 </script>
 <style>
