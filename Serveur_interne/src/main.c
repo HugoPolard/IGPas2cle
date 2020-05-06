@@ -92,7 +92,7 @@ void route() {
             if (strcmp(param, "lock") == 0) {
                 if (strcmp(value, "true") == 0) {
                     log_info("On verouille la porte");
-//                    system("systemctl kill -s 10 doorD.service");
+                    system("systemctl kill -s SIGUSR2 doorD.service");
                 } else {
                     log_info("On ne verouille pas la porte");
                 }
