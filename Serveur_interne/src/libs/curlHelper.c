@@ -29,12 +29,12 @@ int sendFile(const char *url, const char *uid, const char *path) {
     if (curl) {
         form = curl_mime_init(curl);
 
-        field = curl_mime_addpart(form);
-        curl_mime_name(field, "image");
-        curl_mime_filedata(field, path);
-        field = curl_mime_addpart(form);
-        curl_mime_name(field, "uid");
-        curl_mime_data(field, uid, CURL_ZERO_TERMINATED);
+        field = curl_mime_addpart(form); // créer input 
+        curl_mime_name(field, "image");  // nom de l'input
+        curl_mime_filedata(field, path); // fichier 
+        field = curl_mime_addpart(form); 
+        curl_mime_name(field, "uid");	 
+        curl_mime_data(field, uid, CURL_ZERO_TERMINATED); // on termine le formulaire
 
         curl_easy_setopt(curl, CURLOPT_URL, url);
         curl_easy_setopt(curl, CURLOPT_NOBODY, 1);

@@ -7,28 +7,41 @@
 #include "libs/log.h"
 #include "libs/split.h"
 #include <curl/curl.h>
-#include <sys/stat.h>
 #include "libs/curlHelper.h"
 #include "libs/httpd.h"
+#include <sys/stat.h>
 
 
 void *fileChangeHandler(void *args) {
 
-    //    char *filename = "/tmp/data_exchange/to_server.txt";
-    char *filename = exchange_file;
-//    int old_lines = get_lines_in_file(filename);
+
+    //Creation le répertoire d'échange de données si nécessaire
+    struct stat st = {0};
+    char datapath[100];
+    strcpy(datapath, exchange_dir);
+    strcat(datapath, exchange_file);
+    log_debug("path = %s", datapath);
+    if (stat(exchange_dir, &st) == -1) {
+        umask(000);
+        mkdir(exchange_dir, S_IRWXU | S_IRWXG | S_IRWXO);
+        chown(exchange_dir, 0, 0);
+    }
+//    FILE *fd = fopen(datapath, "w");
+//    if (fd == NULL) {
+//        log_error("file non valide");
+//    }
+//    fclose(fd);
+//    char *filename = exchange_file;
     char old_path[50] = "";
     do {
-        /*int newLines = get_lines_in_file(filename);
-        if (newLines == -1) {
-            log_fatal("Fichier non trouvé");
-            system("pwd");
-            break;
-        }*/
 
+        char *lastLine = readLastLine(datapath);
+        if (lastLine == NULL) {
 
-
-        char *lastLine = readLastLine(filename);
+            sleep(1);
+            free(lastLine);
+            continue;
+        }
         char *strUID = split(lastLine, " ; ", 1);
         char *strPath = split(lastLine, " ; ", 2);
 
@@ -109,6 +122,7 @@ int main(int argc, char **argv) {
     curl_global_init(CURL_GLOBAL_DEFAULT);
 
     parse_env();
+    log_debug("%s\n%s\n%s\n", exchange_file, exchange_dir, server_addr);
     log_debug("Curl init réussie");
     pthread_t fileThread;
     pthread_create(&fileThread, NULL, fileChangeHandler, NULL);

@@ -26,9 +26,16 @@ char *readLastLine(char *filename) {
     char *buff = malloc(1024 * sizeof(char));
     if ((fd = fopen(filename, "r")) != NULL) // open file
     {
-        fseek(fd, 0, SEEK_SET); // make sure start from 0
-        while (!feof(fd)) {
-            fscanf(fd, "%[^\n]\n", buff); // read file *prefer using fscanf
+        fseek(fd, 0, SEEK_END); // make sure start from 0
+        unsigned long len = (unsigned long) ftell(fd);
+        if (len > 0) {
+            fseek(fd, 0, SEEK_SET);
+            while (!feof(fd)) {
+                fscanf(fd, "%[^\n]\n", buff); // read file *prefer using fscanf
+            }
+        } else {
+            free(buff);
+            return NULL;
         }
     }
     fclose(fd);
@@ -50,6 +57,8 @@ void parse_env() {
                 exchange_file = value;
             } else if (strcmp(field, "SERVER_URL") == 0) {
                 server_addr = value;
+            } else if (strcmp(field, "EXCHANGE_DIR") == 0) {
+                exchange_dir = value;
             }
         }
     }

@@ -17,6 +17,7 @@ char *readLastLine(char *filename);
 // fichier .env
 char *exchange_file;
 char *server_addr;
+char *exchange_dir;
 
 void parse_env();
 
