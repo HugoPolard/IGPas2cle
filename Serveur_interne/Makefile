@@ -1,4 +1,4 @@
-DEBUG=no
+DEBUG=yes
 CFLAGS=-Wall
 ifeq ($(DEBUG),yes)
 	CC=gcc

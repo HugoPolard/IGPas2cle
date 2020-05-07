@@ -9,40 +9,6 @@
 #include <stdlib.h>
 
 char *split(char *string, char *delimiter, int num) {
-    /*size_t len = strlen(string);
-    char *copy = calloc(sizeof(char), (len + 1));
-    memcpy(copy, string, len + 1); // pour avoir le \0
-    if (num < 1) {
-        log_warn("Le nombre minimum doit être 1");
-        free(copy);
-        return NULL;
-    }
-    if (num == 1) {
-
-        char *retval = strtok_r(copy, delimiter, &copy);
-        size_t size = strlen(retval) + 1;
-        char *v = calloc(sizeof(char), size);
-        memcpy(v, retval, size);
-        free(copy);
-        return v;
-    } else {
-        char *tok = NULL;
-        for (int i = 1; i <= num; ++i) {
-            tok = strtok_r(copy, delimiter, &copy);
-        }
-        if (tok != NULL) {
-//            copy = (char *) realloc(copy, strlen(tok) + 1);
-            size_t size = strlen(tok) + 1;
-            char *v = calloc(sizeof(char), size);
-            memcpy(v, tok, size);
-            free(copy);
-            return v;
-        }
-    }
-    log_warn("Impossible de trouver la partie de chaîne demandée");
-    free(copy);
-    return NULL;*/
-
     size_t len = strlen(string);
     char *copy = calloc(sizeof(char), (len + 1));
     char *saveptr = NULL;

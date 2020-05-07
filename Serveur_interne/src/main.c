@@ -70,12 +70,6 @@ void *fileChangeHandler(void *args) {
 void route() {
     ROUTE_START()
 
-    ROUTE_GET("/")
-        {
-            printf("HTTP/1.1 200 OK\r\n\r\n");
-            printf("Hello! You are using %s", request_header("User-Agent"));
-        }
-
     ROUTE_GET("/door")
         {
             printf("HTTP/1.1 200 OK\r\n\r\n");
@@ -121,12 +115,12 @@ void route() {
 int main(int argc, char **argv) {
     curl_global_init(CURL_GLOBAL_DEFAULT);
 
+    log_set_level(4);
     parse_env();
     log_debug("%s\n%s\n%s\n", exchange_file, exchange_dir, server_addr);
     log_debug("Curl init réussie");
     pthread_t fileThread;
     pthread_create(&fileThread, NULL, fileChangeHandler, NULL);
-//    listen_and_serve(10000);
     serve_forever("10000");
     pthread_join(fileThread, NULL);
     log_info("A bientôt");
