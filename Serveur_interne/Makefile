@@ -6,8 +6,8 @@ ifeq ($(DEBUG),yes)
 else
 	CC=/home/gregoire/Documents/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
 	TARGET=Serveur_RPI
-	CURL_LIB=-L/home/gregoire/Documents/RPI/Projet/IGPas2cle/build/lib
-	CURL_INC=-I/home/gregoire/Documents/RPI/Projet/IGPas2cle/build/include
+	CURL_LIB=-L/home/gregoire/Documents/RPI/Projet/IGPas2cle/Serveur_Interne/build/lib
+	CURL_INC=-I/home/gregoire/Documents/RPI/Projet/IGPas2cle/Serveur_Interne/build/include
 	CFLAGS=-Wall -std=gnu99
 endif
 
