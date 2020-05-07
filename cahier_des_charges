@@ -12,19 +12,19 @@ Decription du projet :
 Nous souhaitons réaliser une porte connectée qui aura le fonctionnalités suivantes :
 - ouverture de la porte par identification à l'aide d'une carte NFC puis saisie d'un code pin.
 - Accès à une interface Web permettant :
-  - de voir qui est passé par la porte et quand (journal de passage)
-  - de bloquer la porte si nécessaire
-  - d'avoir un flux vidéo en direct permettant de voir qui est devant la porte
+  - de voir qui est passé par la porte et quand (journal de passage avec photos de l'entrée)
+  - de bloquer/débloquer la porte si nécessaire
+- Identification des utilisateurs par carte nfc
 
 Composants utilisés :
-- module NFC MFRC522
-- boutons pour saisies du code pin
+- module NFC RC522
+- composant bcm 2835 pour communication sur le bus SPI avec le RC522
 - caméra de la malette JoyPI
-- serveur web pour l'interface d'administration (flux vidéo et controle de la porte)
-éventuellement :
-- écran LCD pour instructions
+- serveur web distant pour l'interface d'administration
+- serveur local sur le raspberry pi pour traiter les informations des com
 
 Sujets appronfondis :
 - Utilisation de plusieurs composants de la malette, par les ports GPIO
 - Mise en place d'un service Web sur l'objet connecté
 - bus SPI
+- Compilation croisée

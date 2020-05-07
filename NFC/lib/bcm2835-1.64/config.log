@@ -63,77 +63,81 @@ this is the am__doit target
 configure:2475: $? = 0
 configure:2494: result: yes (GNU style)
 configure:2524: checking for x86_64-build_unknown-linux-gnu-gcc
-configure:2551: result: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
+configure:2554: result: no
+configure:2564: checking for gcc
+configure:2580: found /usr/bin/gcc
+configure:2591: result: gcc
 configure:2820: checking for C compiler version
-configure:2829: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc --version >&5
-arm-linux-gnueabihf-gcc (crosstool-NG linaro-1.13.1+bzr2650 - Linaro GCC 2014.03) 4.8.3 20140303 (prerelease)
-Copyright (C) 2013 Free Software Foundation, Inc.
+configure:2829: gcc --version >&5
+gcc (Debian 9.3.0-3) 9.3.0
+Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 configure:2840: $? = 0
-configure:2829: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -v >&5
+configure:2829: gcc -v >&5
 Using built-in specs.
-COLLECT_GCC=/root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
-COLLECT_LTO_WRAPPER=/root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/../libexec/gcc/arm-linux-gnueabihf/4.8.3/lto-wrapper
-Target: arm-linux-gnueabihf
-Configured with: /home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/src/gcc-linaro-4.8-2014.03/configure --build=x86_64-build_unknown-linux-gnu --host=x86_64-build_unknown-linux-gnu --target=arm-linux-gnueabihf --prefix=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/install --with-sysroot=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/install/arm-linux-gnueabihf/libc --enable-languages=c,c++,fortran --disable-multilib --enable-multiarch --with-arch=armv6 --with-tune=arm1176jz-s --with-fpu=vfp --with-float=hard --with-pkgversion='crosstool-NG linaro-1.13.1+bzr2650 - Linaro GCC 2014.03' --with-bugurl=https://bugs.launchpad.net/gcc-linaro --enable-__cxa_atexit --enable-libmudflap --enable-libgomp --enable-libssp --with-gmp=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --with-mpfr=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --with-mpc=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --with-isl=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --with-cloog=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --with-libelf=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --enable-threads=posix --disable-libstdcxx-pch --enable-linker-build-id --enable-plugin --enable-gold --with-local-prefix=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/install/arm-linux-gnueabihf/libc --enable-c99 --enable-long-long --with-float=hard
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none:hsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Debian 9.3.0-3' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-mutex
 Thread model: posix
-gcc version 4.8.3 20140303 (prerelease) (crosstool-NG linaro-1.13.1+bzr2650 - Linaro GCC 2014.03) 
+gcc version 9.3.0 (Debian 9.3.0-3) 
 configure:2840: $? = 0
-configure:2829: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -V >&5
-arm-linux-gnueabihf-gcc: error: unrecognized command line option '-V'
-arm-linux-gnueabihf-gcc: fatal error: no input files
+configure:2829: gcc -V >&5
+gcc: error: unrecognized command line option '-V'
+gcc: fatal error: no input files
 compilation terminated.
 configure:2840: $? = 1
-configure:2829: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -qversion >&5
-arm-linux-gnueabihf-gcc: error: unrecognized command line option '-qversion'
-arm-linux-gnueabihf-gcc: fatal error: no input files
+configure:2829: gcc -qversion >&5
+gcc: error: unrecognized command line option '-qversion'; did you mean '--version'?
+gcc: fatal error: no input files
 compilation terminated.
 configure:2840: $? = 1
 configure:2860: checking whether the C compiler works
-configure:2882: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc    conftest.c  >&5
+configure:2882: gcc    conftest.c  >&5
 configure:2886: $? = 0
 configure:2934: result: yes
 configure:2937: checking for C compiler default output file name
 configure:2939: result: a.out
 configure:2945: checking for suffix of executables
-configure:2952: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -o conftest    conftest.c  >&5
+configure:2952: gcc -o conftest    conftest.c  >&5
 configure:2956: $? = 0
 configure:2978: result: 
 configure:3000: checking whether we are cross compiling
-configure:3008: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -o conftest    conftest.c  >&5
+configure:3008: gcc -o conftest    conftest.c  >&5
 configure:3012: $? = 0
 configure:3019: ./conftest
-./configure: line 3021: ./conftest: cannot execute binary file: Exec format error
-configure:3023: $? = 126
-configure:3011: result: yes
+configure:3023: $? = 0
+configure:3011: result: no
 configure:3016: checking for suffix of object files
-configure:3038: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -c   conftest.c >&5
+configure:3038: gcc -c   conftest.c >&5
 configure:3042: $? = 0
 configure:3063: result: o
 configure:3067: checking whether we are using the GNU C compiler
-configure:3086: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -c   conftest.c >&5
+configure:3086: gcc -c   conftest.c >&5
 configure:3086: $? = 0
 configure:3095: result: yes
-configure:3104: checking whether /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc accepts -g
-configure:3124: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -c -g  conftest.c >&5
+configure:3104: checking whether gcc accepts -g
+configure:3124: gcc -c -g  conftest.c >&5
 configure:3124: $? = 0
 configure:3165: result: yes
-configure:3182: checking for /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc option to accept ISO C89
-configure:3245: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc  -c -g -O2  conftest.c >&5
+configure:3182: checking for gcc option to accept ISO C89
+configure:3245: gcc  -c -g -O2  conftest.c >&5
 configure:3245: $? = 0
 configure:3258: result: none needed
-configure:3283: checking whether /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc understands -c and -o together
-configure:3305: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -c conftest.c -o conftest2.o
+configure:3283: checking whether gcc understands -c and -o together
+configure:3305: gcc -c conftest.c -o conftest2.o
 configure:3308: $? = 0
-configure:3305: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -c conftest.c -o conftest2.o
+configure:3305: gcc -c conftest.c -o conftest2.o
 configure:3308: $? = 0
 configure:3320: result: yes
-configure:3339: checking dependency style of /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
+configure:3339: checking dependency style of gcc
 configure:3450: result: gcc3
 configure:3466: checking for clock_gettime in -lrt
-configure:3491: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -o conftest -g -O2   conftest.c -lrt   >&5
+configure:3491: gcc -o conftest -g -O2   conftest.c -lrt   >&5
 configure:3491: $? = 0
 configure:3500: result: yes
 configure:3515: checking for doxygen
@@ -144,45 +148,46 @@ configure:3590: result: no
 configure:3600: checking for ranlib
 configure:3616: found /usr/bin/ranlib
 configure:3627: result: ranlib
-configure:3639: WARNING: using cross tools not prefixed with host triplet
 configure:3657: checking for x86_64-build_unknown-linux-gnu-gcc
-configure:3684: result: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
+configure:3684: result: gcc
 configure:3953: checking for C compiler version
-configure:3962: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc --version >&5
-arm-linux-gnueabihf-gcc (crosstool-NG linaro-1.13.1+bzr2650 - Linaro GCC 2014.03) 4.8.3 20140303 (prerelease)
-Copyright (C) 2013 Free Software Foundation, Inc.
+configure:3962: gcc --version >&5
+gcc (Debian 9.3.0-3) 9.3.0
+Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 configure:3973: $? = 0
-configure:3962: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -v >&5
+configure:3962: gcc -v >&5
 Using built-in specs.
-COLLECT_GCC=/root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
-COLLECT_LTO_WRAPPER=/root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/../libexec/gcc/arm-linux-gnueabihf/4.8.3/lto-wrapper
-Target: arm-linux-gnueabihf
-Configured with: /home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/src/gcc-linaro-4.8-2014.03/configure --build=x86_64-build_unknown-linux-gnu --host=x86_64-build_unknown-linux-gnu --target=arm-linux-gnueabihf --prefix=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/install --with-sysroot=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/install/arm-linux-gnueabihf/libc --enable-languages=c,c++,fortran --disable-multilib --enable-multiarch --with-arch=armv6 --with-tune=arm1176jz-s --with-fpu=vfp --with-float=hard --with-pkgversion='crosstool-NG linaro-1.13.1+bzr2650 - Linaro GCC 2014.03' --with-bugurl=https://bugs.launchpad.net/gcc-linaro --enable-__cxa_atexit --enable-libmudflap --enable-libgomp --enable-libssp --with-gmp=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --with-mpfr=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --with-mpc=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --with-isl=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --with-cloog=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --with-libelf=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/.build/arm-linux-gnueabihf/build/static --enable-threads=posix --disable-libstdcxx-pch --enable-linker-build-id --enable-plugin --enable-gold --with-local-prefix=/home/zhehe01/work/bzr/pi-build/builds/arm-linux-gnueabihf-raspbian-linux/install/arm-linux-gnueabihf/libc --enable-c99 --enable-long-long --with-float=hard
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/9/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none:hsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Debian 9.3.0-3' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none,hsa --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-mutex
 Thread model: posix
-gcc version 4.8.3 20140303 (prerelease) (crosstool-NG linaro-1.13.1+bzr2650 - Linaro GCC 2014.03) 
+gcc version 9.3.0 (Debian 9.3.0-3) 
 configure:3973: $? = 0
-configure:3962: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -V >&5
-arm-linux-gnueabihf-gcc: error: unrecognized command line option '-V'
-arm-linux-gnueabihf-gcc: fatal error: no input files
+configure:3962: gcc -V >&5
+gcc: error: unrecognized command line option '-V'
+gcc: fatal error: no input files
 compilation terminated.
 configure:3973: $? = 1
-configure:3962: /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc -qversion >&5
-arm-linux-gnueabihf-gcc: error: unrecognized command line option '-qversion'
-arm-linux-gnueabihf-gcc: fatal error: no input files
+configure:3962: gcc -qversion >&5
+gcc: error: unrecognized command line option '-qversion'; did you mean '--version'?
+gcc: fatal error: no input files
 compilation terminated.
 configure:3973: $? = 1
 configure:3977: checking whether we are using the GNU C compiler
 configure:4005: result: yes
-configure:4014: checking whether /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc accepts -g
+configure:4014: checking whether gcc accepts -g
 configure:4075: result: yes
-configure:4092: checking for /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc option to accept ISO C89
+configure:4092: checking for gcc option to accept ISO C89
 configure:4168: result: none needed
-configure:4193: checking whether /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc understands -c and -o together
+configure:4193: checking whether gcc understands -c and -o together
 configure:4230: result: yes
-configure:4249: checking dependency style of /root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
+configure:4249: checking dependency style of gcc
 configure:4360: result: gcc3
 configure:4490: checking that generated files are newer than configure
 configure:4496: result: done
@@ -218,8 +223,8 @@ config.status:1155: $? = 0
 ## ---------------- ##
 
 ac_cv_c_compiler_gnu=yes
-ac_cv_env_CC_set=set
-ac_cv_env_CC_value=/root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
+ac_cv_env_CC_set=
+ac_cv_env_CC_value=
 ac_cv_env_CFLAGS_set=
 ac_cv_env_CFLAGS_value=
 ac_cv_env_CPPFLAGS_set=
@@ -239,7 +244,8 @@ ac_cv_objext=o
 ac_cv_path_install='/usr/bin/install -c'
 ac_cv_path_mkdir=/usr/bin/mkdir
 ac_cv_prog_AWK=gawk
-ac_cv_prog_CC=/root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc
+ac_cv_prog_CC=gcc
+ac_cv_prog_ac_ct_CC=gcc
 ac_cv_prog_ac_ct_RANLIB=ranlib
 ac_cv_prog_ac_ct_STRIP=strip
 ac_cv_prog_cc_c89=
@@ -253,7 +259,7 @@ am_cv_prog_cc_c_o=yes
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /root/Bureau/IGPas2cle/NFC/c/lib/bcm2835-1.64/missing aclocal-1.16'
+ACLOCAL='${SHELL} /root/Bureau/IGPas2cle/NFC/lib/bcm2835-1.64/missing aclocal-1.16'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
@@ -262,11 +268,11 @@ AM_BACKSLASH='\'
 AM_DEFAULT_V='$(AM_DEFAULT_VERBOSITY)'
 AM_DEFAULT_VERBOSITY='1'
 AM_V='$(V)'
-AUTOCONF='${SHELL} /root/Bureau/IGPas2cle/NFC/c/lib/bcm2835-1.64/missing autoconf'
-AUTOHEADER='${SHELL} /root/Bureau/IGPas2cle/NFC/c/lib/bcm2835-1.64/missing autoheader'
-AUTOMAKE='${SHELL} /root/Bureau/IGPas2cle/NFC/c/lib/bcm2835-1.64/missing automake-1.16'
+AUTOCONF='${SHELL} /root/Bureau/IGPas2cle/NFC/lib/bcm2835-1.64/missing autoconf'
+AUTOHEADER='${SHELL} /root/Bureau/IGPas2cle/NFC/lib/bcm2835-1.64/missing autoheader'
+AUTOMAKE='${SHELL} /root/Bureau/IGPas2cle/NFC/lib/bcm2835-1.64/missing automake-1.16'
 AWK='gawk'
-CC='/root/Bureau/RPI/tools-master/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc'
+CC='gcc'
 CCDEPMODE='depmode=gcc3'
 CFLAGS='-g -O2'
 CPPFLAGS=''
@@ -288,7 +294,7 @@ LDFLAGS=''
 LIBOBJS=''
 LIBS='-lrt '
 LTLIBOBJS=''
-MAKEINFO='${SHELL} /root/Bureau/IGPas2cle/NFC/c/lib/bcm2835-1.64/missing makeinfo'
+MAKEINFO='${SHELL} /root/Bureau/IGPas2cle/NFC/lib/bcm2835-1.64/missing makeinfo'
 MKDIR_P='/usr/bin/mkdir -p'
 OBJEXT='o'
 PACKAGE='bcm2835'
@@ -304,7 +310,7 @@ SET_MAKE=''
 SHELL='/bin/bash'
 STRIP='strip'
 VERSION='1.64'
-ac_ct_CC=''
+ac_ct_CC='gcc'
 am__EXEEXT_FALSE=''
 am__EXEEXT_TRUE='#'
 am__fastdepCC_FALSE='#'
@@ -327,7 +333,7 @@ host_alias='x86_64-build_unknown-linux-gnu'
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='${SHELL} /root/Bureau/IGPas2cle/NFC/c/lib/bcm2835-1.64/install-sh'
+install_sh='${SHELL} /root/Bureau/IGPas2cle/NFC/lib/bcm2835-1.64/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'

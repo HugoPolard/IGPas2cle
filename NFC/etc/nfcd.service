@@ -1,0 +1,17 @@
+[Unit]
+Description=Service de lecture de carte NFC et prise de photo a la lecture
+
+[Service]
+Type=forking
+
+User=root
+Group=root
+Mask=777
+
+ExecStart=/usr/bin/nfcd
+
+
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target 

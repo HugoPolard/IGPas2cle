@@ -1,13 +1,13 @@
 # NOTES
 # La compilation de la librairie bcm2835 doit être faite ultérieurement
 
-all: getUID 
+all: nfcd 
 
 ############## Variables
 
-LIB_RC522=/root/Bureau/IGPas2cle/NFC/c/lib/rc522
-LIB_BCM2835=/root/Bureau/IGPas2cle/NFC/c/lib/bcm2835-1.64/src
-TARGET_LIBS=/root/Bureau/IGPas2cle/NFC/c/lib/bcm2835-1.56/src/
+LIB_RC522=/root/Bureau/IGPas2cle/NFC/lib/rc522
+LIB_BCM2835=/root/Bureau/IGPas2cle/NFC/lib/bcm2835-1.64/src
+TARGET_LIBS=/root/Bureau/IGPas2cle/NFC/lib/bcm2835-1.56/src/
 # options pour la précompilation 
 CPPFLAGS=-I$(LIB_RC522) -I$(LIB_BCM2835)
 # options pour l'édition de liens 
@@ -31,8 +31,12 @@ librc522_install:
 	@echo "copie de rc522.conf depuis la librairie dans /etc"
 	cp $(LIB_RC522)/RC522.conf /etc/RC522.conf
 
-getUID: src/getUID.c librc522 librc522_install
-	gcc $(CPPFLAGS) $(LDFLAGS) src/getUID.c -o bin/getUID -lrc522 -lbcm2835
+nfcd: src/getUID.c librc522 librc522_install
+	gcc $(CPPFLAGS) $(LDFLAGS) src/getUID.c -o bin/nfcd -lrc522 -lbcm2835
+
+nfcd_install:
+	@echo "copie de nfcd dans /usr/bin/nfcd"
+	cp $(LIB_RC522)/librc522.so /usr/lib/librc522.so
 
 
 
@@ -46,10 +50,10 @@ librc522_cross: $(LIB_RC522)/config.c $(LIB_RC522)/rc522.c $(LIB_RC522)/rfid.c $
 	$(CC) $(CPPFLAGS) -c -fPIC $(LIB_RC522)/main.c -o $(LIB_RC522)/main.o
 	$(CC) -shared $(LIB_RC522)/main.o $(LIB_RC522)/rfid.o $(LIB_RC522)/config.o $(LIB_RC522)/value.o $(LIB_RC522)/rc522.o -o $(LIB_RC522)/librc522.so
 
-getUID_cross: src/getUID.c librc522_cross
-	$(CC) $(CPPFLAGS) $(LDFLAGS) src/getUID.c -o bin/getUID -lrc522 -lbcm2835
+nfcd_cross: src/getUID.c librc522_cross
+	$(CC) $(CPPFLAGS) $(LDFLAGS) -Wall src/getUID.c -o bin/nfcd -lrc522 -lbcm2835
 
-getUID_cross_static: src/getUID.c 
+nfcd_cross_static: src/getUID.c 
 	$(CC) -static $(CPPFLAGS) $(LDFLAGS) src/read.c -o read
 
 clean: 
