@@ -1,0 +1,17 @@
+[Unit]
+Description=Service d ouverture de porte
+
+[Service]
+Type=forking
+
+User=root
+Group=root
+UMask=777
+
+ExecStart=/usr/bin/dord
+
+
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target 
