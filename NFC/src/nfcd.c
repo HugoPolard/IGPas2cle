@@ -60,7 +60,30 @@ void send_infos_to_server (char* uid_string, char* pic_path) {
 }
 
 int main(int argc, char *argv[]) {
-    // must be run as root to open /dev/mem in BMC2835
+
+	// Préparation pour pouvoir être lancé en tant que service
+	pid_t pid, sid;
+	pid = fork();
+	if (pid < 0) {
+	        exit(EXIT_FAILURE);
+	}
+	if (pid > 0) {
+	        exit(EXIT_SUCCESS);
+	}
+	umask(0);
+	sid = setsid();		// recréation d'une session indépendante
+	if (sid < 0) {
+    	exit(EXIT_FAILURE);
+	}
+	if ((chdir("/")) < 0) { 	// déplacement à la racine de cette session
+    	exit(EXIT_FAILURE);
+	}
+	// Fermeture des buffers d'entrée/sorite classiques
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
+
+	// must be run as root to open /dev/mem in BMC2835
     if (geteuid() != 0)
     {
         syslog(LOG_NOTICE, "Must be run as root.\n");
